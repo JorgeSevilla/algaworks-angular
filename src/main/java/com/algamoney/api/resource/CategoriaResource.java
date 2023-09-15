@@ -23,7 +23,7 @@ import com.algamoney.api.repository.CategoriaRepository;
 public class CategoriaResource {
 
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private CategoriaRepository categoriaRepository; 
 	
 	@GetMapping
 	public List<Categoria> listar() {
