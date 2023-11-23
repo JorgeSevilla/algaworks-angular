@@ -23,7 +23,7 @@ public class Usuario {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_permissao", joinColumns = @JoinColumn(name = "codigo_usuario")
-				, inverseJoinColumns = @JoinColumn(name = "codigo_permissaro"))
+				, inverseJoinColumns = @JoinColumn(name = "codigo_permissao"))
 	
 	private List<Permissao> permissoes;
 	
@@ -50,6 +50,12 @@ public class Usuario {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public List<Permissao> getPermissoes() {
+		return permissoes;
+	}
+	public void setPermissoes(List<Permissao> permissoes) {
+		this.permissoes = permissoes;
 	}
 	
 	
