@@ -24,22 +24,26 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private UserDetailsService userDetailsService;
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory().withClient("angular").secret(passwordEncoder.encode("@ngul@r0")).scopes("read", "write")
-				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(1800)
-				.accessTokenValiditySeconds(3600 * 24);
+		clients.inMemory()
+							.withClient("angular").secret("$2a$10$UAc049fUm6Bxy8X/.mpn8.PfD2ncb4ZgvmEa5Hb.JOGVJNX1ampgG").scopes("read", "write")
+							.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(1800)
+							.accessTokenValiditySeconds(3600 * 24)
+						.and()
+							.withClient("mobile").secret(passwordEncoder.encode("m0b1le")).scopes("read")
+							.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(1800)
+							.accessTokenValiditySeconds(3600 * 24);
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.authenticationManager(authenticationManager).accessTokenConverter(accessTokenConverter())
-				.tokenStore(tokenStore())
-				.userDetailsService(userDetailsService).reuseRefreshTokens(false);
+				.tokenStore(tokenStore()).userDetailsService(userDetailsService).reuseRefreshTokens(false);
 	}
 
 	@Bean
